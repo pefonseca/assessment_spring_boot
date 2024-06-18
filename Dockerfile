@@ -15,6 +15,9 @@ WORKDIR /app
 # Executar o build do Maven
 RUN mvn clean install
 
+# Verificar o conteúdo do diretório target
+RUN ls -la /app/target
+
 # Stage 2: Run
 FROM openjdk:17-jdk-slim
 
@@ -22,7 +25,7 @@ FROM openjdk:17-jdk-slim
 EXPOSE 8080
 
 # Copiar o JAR do estágio de build para o estágio final
-COPY --from=build /app/target/deploy_render-1.0.0.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 # Definir o comando de entrada para rodar o JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
