@@ -35,6 +35,11 @@ public class Nota {
     @JoinColumn(name = "disciplina_id")
     private Disciplina disciplina;
 
+    public Nota(long l, double v) {
+        this.id = l;
+        this.valor = v;
+    }
+
     public NotaResponseDTO toDto() {
         NotaResponseDTO dto = new NotaResponseDTO();
         dto.setId(id);
